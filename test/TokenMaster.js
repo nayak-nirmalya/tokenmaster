@@ -1,23 +1,26 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
+const NAME = "TokenMaster";
+const SYMBOL = "TM";
+
 describe("TokenMaster", () => {
   let tokenMaster;
 
   beforeEach(async () => {
-    const TokenMaster = await ethers.getContractFactory("TokenMaster");
-    tokenMaster = await TokenMaster.deploy("TokenMaster", "TM");
+    const TokenMaster = await ethers.getContractFactory(NAME);
+    tokenMaster = await TokenMaster.deploy(NAME, SYMBOL);
   });
 
   describe("Deployment", () => {
     it("sets the contract name", async () => {
       const name = await tokenMaster.name();
-      expect(name).to.equal("TokenMaster");
+      expect(name).to.equal(NAME);
     });
 
     it("sets the contract symbol", async () => {
       const symbol = await tokenMaster.symbol();
-      expect(symbol).to.equal("TM");
+      expect(symbol).to.equal(SYMBOL);
     });
   });
 });
