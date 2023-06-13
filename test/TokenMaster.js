@@ -26,5 +26,9 @@ describe("TokenMaster", () => {
       const symbol = await tokenMaster.symbol();
       expect(symbol).to.equal(SYMBOL);
     });
+
+    it("sets the contract owner to deployer", async () => {
+      expect(await tokenMaster.owner()).to.equal(deployer.address);
+    });
   });
 });
