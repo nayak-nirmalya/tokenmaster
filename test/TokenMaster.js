@@ -57,10 +57,17 @@ describe("TokenMaster", () => {
       expect(totalOccasions).to.equal(1);
     });
 
-    // it("sets the contract symbol", async () => {
-    //   const symbol = await tokenMaster.symbol();
-    //   expect(symbol).to.equal(SYMBOL);
-    // });
+    it("returns occasions attribute", async () => {
+      const occasion = await tokenMaster.getOccasion(1);
+
+      expect(occasion.id).to.be.equal(1);
+      expect(occasion.name).to.be.equal(OCCASION_NAME);
+      expect(occasion.costs).to.be.equal(OCCASION_COST);
+      expect(occasion.tickets).to.be.equal(OCCASION_MAX_TICKETS);
+      expect(occasion.date).to.be.equal(OCCASION_DATE);
+      expect(occasion.time).to.be.equal(OCCASION_TIME);
+      expect(occasion.location).to.be.equal(OCCASION_LOCATION);
+    });
 
     // it("sets the contract owner to deployer", async () => {
     //   expect(await tokenMaster.owner()).to.equal(deployer.address);
