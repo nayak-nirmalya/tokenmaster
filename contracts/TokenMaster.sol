@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract TokenMaster is ERC721 {
     address public owner;
+    uint256 public totalOccasions;
 
     struct Occasion {
         uint256 id;
@@ -16,6 +17,8 @@ contract TokenMaster is ERC721 {
         string time;
         string location;
     }
+
+    mapping(uint256 => Occasion) occasions;
 
     constructor(
         string memory _name,
@@ -31,5 +34,17 @@ contract TokenMaster is ERC721 {
         string memory _date,
         string memory _time,
         string memory _location
-    ) public {}
+    ) public {
+        totalOccasions++;
+        Occasion(
+            totalOccasions,
+            _name,
+            _cost,
+            _maxTickets,
+            _maxTickets,
+            _date,
+            _time,
+            _location
+        );
+    }
 }
