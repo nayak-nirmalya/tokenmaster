@@ -69,8 +69,19 @@ describe("TokenMaster", () => {
       expect(occasion.location).to.be.equal(OCCASION_LOCATION);
     });
 
-    // it("sets the contract owner to deployer", async () => {
-    //   expect(await tokenMaster.owner()).to.equal(deployer.address);
-    // });
+    it("should fail if not owner list event", async () => {
+      await expect(
+        tokenMaster
+          .connect(buyer)
+          .list(
+            OCCASION_NAME,
+            OCCASION_COST,
+            OCCASION_MAX_TICKETS,
+            OCCASION_DATE,
+            OCCASION_TIME,
+            OCCASION_LOCATION
+          )
+      ).to.be.reverted;
+    });
   });
 });
