@@ -36,7 +36,8 @@ contract TokenMaster is ERC721 {
         string memory _location
     ) public {
         totalOccasions++;
-        Occasion(
+
+        occasions[totalOccasions] = Occasion(
             totalOccasions,
             _name,
             _cost,
