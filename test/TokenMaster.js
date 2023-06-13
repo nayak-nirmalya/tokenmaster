@@ -69,7 +69,7 @@ describe("TokenMaster", () => {
       expect(occasion.location).to.be.equal(OCCASION_LOCATION);
     });
 
-    it("should fail if not owner list event", async () => {
+    it("should fail if not owner lists event", async () => {
       await expect(
         tokenMaster
           .connect(buyer)
@@ -81,7 +81,7 @@ describe("TokenMaster", () => {
             OCCASION_TIME,
             OCCASION_LOCATION
           )
-      ).to.be.reverted;
+      ).to.be.revertedWith("Not Owner!");
     });
   });
 });
