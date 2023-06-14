@@ -117,5 +117,10 @@ describe("TokenMaster", () => {
       expect(seats.length).to.equal(1);
       expect(seats[0]).to.equal(SEAT);
     });
+
+    it("updates contract balance", async () => {
+      const balance = await ethers.provider.getBalance(tokenMaster.address);
+      expect(balance).to.be.equal(AMOUNT);
+    });
   });
 });
