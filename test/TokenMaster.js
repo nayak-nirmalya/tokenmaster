@@ -106,5 +106,10 @@ describe("TokenMaster", () => {
       const status = await tokenMaster.hasBought(ID, buyer.address);
       expect(status).to.be.equal(true);
     });
+
+    it("updates seat status", async () => {
+      const owner = await tokenMaster.seatTaken(ID, SEAT);
+      expect(owner).to.be.equal(buyer.address);
+    });
   });
 });
