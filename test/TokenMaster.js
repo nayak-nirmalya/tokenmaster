@@ -134,5 +134,13 @@ describe("TokenMaster", () => {
         tokenMaster.connect(buyer).mint(14, SEAT, { value: AMOUNT })
       ).to.be.revertedWith("ID Value Should Not Exceed Total Occasions.");
     });
+
+    it("should fail if not enough ETH", async () => {
+      await expect(
+        tokenMaster
+          .connect(buyer)
+          .mint(1, SEAT, { value: ethers.utils.parseUnits("0.1", "ether") })
+      ).to.be.revertedWith("Not Enough ETH.");
+    });
   });
 });
