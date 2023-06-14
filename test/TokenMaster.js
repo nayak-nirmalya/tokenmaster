@@ -149,4 +149,33 @@ describe("TokenMaster", () => {
       ).to.be.revertedWith("Not Enough ETH.");
     });
   });
+
+  describe("Withdrawing", () => {
+    const ID = 1;
+    const SEAT = 50;
+    const AMOUNT = ethers.utils.parseUnits("1", "ether");
+    let balanceBefore;
+
+    beforeEach(async () => {
+      balanceBefore = await ethers.provider.getBalance(deployer.address);
+
+      let transaction = await tokenMaster
+        .connect(buyer)
+        .mint(ID, SEAT, { value: AMOUNT });
+      await transaction.wait();
+
+      transaction = await tokenMaster.connect(deployer).withdraw();
+      await transaction.wait();
+    });
+
+    it("updates the owner balance", async () => {
+      const balanceAfter = await ethers.provider.getBalance(deployer.address);
+      expect(balanceAfter).to.be.greaterThan(balanceBefore);
+    });
+
+    it("updates the contract balance", async () => {
+      const balance = await ethers.provider.getBalance(tokenMaster.address);
+      expect(balance).to.equal(0);
+    });
+  });
 });
