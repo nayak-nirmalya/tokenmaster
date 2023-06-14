@@ -66,6 +66,9 @@ contract TokenMaster is ERC721 {
 
         require(msg.value >= occasions[_id].costs, "Not Enough ETH.");
 
+        require(seatTaken[_id][_seat] == address(0), "Seat Already Taken.");
+        require(_seat <= occasions[_id].maxTickets, "Invalid Seat.");
+
         occasions[_id].tickets -= 1;
 
         hasBought[_id][msg.sender] = true;
