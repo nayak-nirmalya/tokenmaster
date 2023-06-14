@@ -64,6 +64,8 @@ contract TokenMaster is ERC721 {
             "ID Value Should Not Exceed Total Occasions."
         );
 
+        require(msg.value >= occasions[_id].costs, "Not Enough ETH.");
+
         occasions[_id].tickets -= 1;
 
         hasBought[_id][msg.sender] = true;
