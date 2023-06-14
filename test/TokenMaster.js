@@ -128,5 +128,11 @@ describe("TokenMaster", () => {
         tokenMaster.connect(buyer).mint(0, SEAT, { value: AMOUNT })
       ).to.be.revertedWith("ID Should Have Non-Zero Value.");
     });
+
+    it("should fail if id value greater than total occasions", async () => {
+      await expect(
+        tokenMaster.connect(buyer).mint(14, SEAT, { value: AMOUNT })
+      ).to.be.revertedWith("ID Value Should Not Exceed Total Occasions.");
+    });
   });
 });
