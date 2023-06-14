@@ -122,5 +122,11 @@ describe("TokenMaster", () => {
       const balance = await ethers.provider.getBalance(tokenMaster.address);
       expect(balance).to.be.equal(AMOUNT);
     });
+
+    it("should fail if id value 0", async () => {
+      await expect(
+        tokenMaster.connect(buyer).mint(0, SEAT, { value: AMOUNT })
+      ).to.be.revertedWith("ID Should Have Non-Zero Value.");
+    });
   });
 });
