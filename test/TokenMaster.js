@@ -135,6 +135,12 @@ describe("TokenMaster", () => {
       ).to.be.revertedWith("ID Value Should Not Exceed Total Occasions.");
     });
 
+    it("should fail if seat value greater than total tickets", async () => {
+      await expect(
+        tokenMaster.connect(buyer).mint(1, 101, { value: AMOUNT })
+      ).to.be.revertedWith("Invalid Seat.");
+    });
+
     it("should fail if not enough ETH", async () => {
       await expect(
         tokenMaster
