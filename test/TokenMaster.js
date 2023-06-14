@@ -84,4 +84,22 @@ describe("TokenMaster", () => {
       ).to.be.revertedWith("Not Owner!");
     });
   });
+
+  describe("Mint", () => {
+    const ID = 1;
+    const SEAT = 50;
+    const AMOUNT = ethers.utils.parseUnits("1", "ether");
+
+    beforeEach(async () => {
+      const transaction = await tokenMaster
+        .connect(buyer)
+        .mint(ID, SEAT, { value: AMOUNT });
+      await transaction.wait();
+    });
+
+    it("updates the ticket count", async () => {
+      const occasion = await tokenMaster.getOccasion(1);
+      expect(occasion.tickets).to.be.equal(OCCASION_MAX_TICKETS - 1);
+    });
+  });
 });
