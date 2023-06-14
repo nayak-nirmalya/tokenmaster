@@ -59,6 +59,10 @@ contract TokenMaster is ERC721 {
 
     function mint(uint256 _id, uint256 _seat) public payable {
         require(_id != 0, "ID Should Have Non-Zero Value.");
+        require(
+            _id <= totalOccasions,
+            "ID Value Should Not Exceed Total Occasions."
+        );
 
         occasions[_id].tickets -= 1;
 
