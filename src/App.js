@@ -67,6 +67,8 @@ function App() {
         </h2>
       </header>
 
+      <Sort />
+
       <div className="cards">
         {occasions?.map((occasion, index) => (
           <Card
