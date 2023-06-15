@@ -41,6 +41,7 @@ function App() {
   return (
     <div>
       <header>
+        <Navigation account={account} setAccount={setAccount} />
         <h2 className="header__title">
           <strong>Welcome to Tokenmaster</strong>
           <p>{account}</p>
