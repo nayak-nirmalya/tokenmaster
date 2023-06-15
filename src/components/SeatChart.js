@@ -21,7 +21,7 @@ const SeatChart = ({ occasion, tokenMaster, provider, setToggle }) => {
     const signer = await provider.getSigner();
     const transaction = await tokenMaster
       .connect(signer)
-      .mint(occasion.id, _seat, { value: occasion.cost });
+      .mint(occasion.id, _seat, { value: occasion.costs });
     await transaction.wait();
 
     setHasSold(true);
