@@ -40,7 +40,6 @@ function App() {
       occasions.push(occasion);
     }
     setOccasions(occasions);
-    console.log(occasions);
 
     window.ethereum.on("accountsChanged", async () => {
       const accounts = await window.ethereum.request({
@@ -63,7 +62,12 @@ function App() {
           <strong>Welcome to TokenMaster</strong>
         </h2>
       </header>
-      <p>{account}</p>
+
+      <div className="cards">
+        {occasions?.map((occasion, index) => (
+          <p key={index}>{occasion.name}</p>
+        ))}
+      </div>
     </div>
   );
 }
