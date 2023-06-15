@@ -16,8 +16,12 @@ import config from "./config.json";
 function App() {
   const [account, setAccount] = useState(null);
   const [provider, setProvider] = useState(null);
+
   const [tokenMaster, setTokenMaster] = useState(null);
   const [occasions, setOccasions] = useState(null);
+
+  const [occasion, setOccasion] = useState({});
+  const [toggle, setToggle] = useState(false);
 
   const loadBlockchainData = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -65,7 +69,17 @@ function App() {
 
       <div className="cards">
         {occasions?.map((occasion, index) => (
-          <p key={index}>{occasion.name}</p>
+          <Card
+            occasion={occasion}
+            id={index + 1}
+            tokenMaster={tokenMaster}
+            provider={provider}
+            account={account}
+            toggle={toggle}
+            setToggle={setToggle}
+            setOccasion={setOccasion}
+            key={index}
+          />
         ))}
       </div>
     </div>
