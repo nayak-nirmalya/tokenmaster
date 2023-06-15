@@ -21,8 +21,12 @@ function App() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     setProvider(provider);
 
+    const network = await provider.getNetwork();
+
+    const CONTRACT_ADDRESS = config[network.chainId].TokenMaster.address;
+
     const tokenMaster = new ethers.Contract(
-      config["31337"]["TokenMaster"]["address"],
+      CONTRACT_ADDRESS,
       TokenMaster,
       provider
     );
