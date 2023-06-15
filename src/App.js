@@ -15,16 +15,12 @@ import config from "./config.json";
 
 function App() {
   const [account, setAccount] = useState(null);
+  const [provider, setProvider] = useState(null);
 
   const loadBlockchainData = async () => {
-    // Fetch Account
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    const account = ethers.utils.getAddress(accounts[0]);
-    setAccount(account);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    setProvider(provider);
 
-    // Refresh Account
     window.ethereum.on("accountsChanged", async () => {
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
@@ -44,9 +40,9 @@ function App() {
         <Navigation account={account} setAccount={setAccount} />
         <h2 className="header__title">
           <strong>Welcome to Tokenmaster</strong>
-          <p>{account}</p>
         </h2>
       </header>
+      <p>{account}</p>
     </div>
   );
 }
