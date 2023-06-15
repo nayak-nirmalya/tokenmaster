@@ -23,7 +23,7 @@ const Card = ({ occasion, toggle, setToggle, setOccasion }) => {
 
         <p className="card__cost">
           <strong>
-            {ethers.utils.formatUnits(occasion.cost.toString(), "ether")}
+            {ethers.utils.formatUnits(occasion.costs.toString(), "ether")}
           </strong>
           ETH
         </p>
