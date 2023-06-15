@@ -16,22 +16,22 @@ import config from "./config.json";
 function App() {
   const [account, setAccount] = useState(null);
   const [provider, setProvider] = useState(null);
+  const [tokenMaster, setTokenMaster] = useState(null);
 
   const loadBlockchainData = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     setProvider(provider);
 
     const network = await provider.getNetwork();
-
     const CONTRACT_ADDRESS = config[network.chainId].TokenMaster.address;
-
     const tokenMaster = new ethers.Contract(
       CONTRACT_ADDRESS,
       TokenMaster,
       provider
     );
+    setTokenMaster(tokenMaster);
 
-    console.log(tokenMaster.address);
+    const totalOccasions = await tokenMaster.totalOccasions();
 
     window.ethereum.on("accountsChanged", async () => {
       const accounts = await window.ethereum.request({
