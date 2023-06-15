@@ -21,6 +21,14 @@ function App() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     setProvider(provider);
 
+    const tokenMaster = new ethers.Contract(
+      config["31337"]["TokenMaster"]["address"],
+      TokenMaster,
+      provider
+    );
+
+    console.log(tokenMaster.address);
+
     window.ethereum.on("accountsChanged", async () => {
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
@@ -39,7 +47,7 @@ function App() {
       <header>
         <Navigation account={account} setAccount={setAccount} />
         <h2 className="header__title">
-          <strong>Welcome to Tokenmaster</strong>
+          <strong>Welcome to TokenMaster</strong>
         </h2>
       </header>
       <p>{account}</p>
